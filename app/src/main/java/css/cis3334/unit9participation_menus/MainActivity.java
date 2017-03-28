@@ -1,5 +1,7 @@
 package css.cis3334.unit9participation_menus;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -68,8 +71,19 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+
             return true;
         }
+        else if(id == R.id.action_add) {
+            Toast.makeText(getApplicationContext(), "adding study mates is not available yet.", Toast.LENGTH_LONG)
+                    .show();
+            return true;
+        } else if(id == R.id.action_delete) {
+            Toast.makeText(getApplicationContext(), "deleting a study mate is not available yet.", Toast.LENGTH_LONG)
+                    .show();
+            return true;
+        }
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -92,7 +106,44 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_send) {
 
+        } else if (id == R.id.nav_add) {
+            Toast.makeText(getApplicationContext(), "adding study mates is not available yet.", Toast.LENGTH_LONG)
+                    .show();
+        } else if (id == R.id.nav_delete) {
+            Toast.makeText(getApplicationContext(), "deleting a study mate is not available yet.", Toast.LENGTH_LONG)
+                    .show();
+        } else if (id == R.id.nav_Settings) {
+            Intent settingsIntent = new Intent(this, SettingsActivity.class);
+            startActivity(settingsIntent);
+        } else if (id == R.id.nav_Email) {
+            Intent intent = new Intent(Intent.ACTION_SENDTO);
+            intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+            intent.putExtra(Intent.EXTRA_EMAIL, "jvang5@css.edu");
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Testing");
+            if (intent.resolveActivity(getPackageManager()) != null) {
+                startActivity(intent);
+            }
+
+        } else if (id == R.id.nav_SMS) {
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setData(Uri.parse("smsto:"));  // This ensures only SMS apps respond
+            intent.putExtra("sms_body", "This is my sample message");
+            intent.putExtra(Intent.EXTRA_STREAM, "123-456-7891");
+            if (intent.resolveActivity(getPackageManager()) != null) {
+                startActivity(intent);
+            }
+
+        } else if (id == R.id.nav_addSub) {
+            Snackbar.make(getWindow().getDecorView(), "this function is not availabe yet.", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null)
+                    .show();
+
+        } else if (id == R.id.nav_deleteSub) {
+            Snackbar.make(getWindow().getDecorView(), "this delete function is not availabe yet.", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null)
+                    .show();
         }
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
